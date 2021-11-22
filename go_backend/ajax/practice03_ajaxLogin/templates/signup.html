@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Document</title>
+    </head>
+    <body>
+        <form method="POST" enctype="application/x-www-form-urlencoded" id="form-create-user">
+            <input type="email" name="username" id="username" placeholder="email"><br>
+            <p class="form-field-err" id="username-err"></p>
+            <input type="text" name="password" id="password" placeholder="password"><br>
+            <input type="text" name="password" id="password2" placeholder="password confirm"><br>
+            <p class="form-field-err" id="password-err"></p>
+            <input type="text" name="firstname" placeholder="first name"><br>
+            <input type="text" name="lastname" placeholder="last name"><br>
+            <label for="sr">Role</label>
+            <select name="role" id="sr">
+                <option value="user">user</option>
+                <option value="admin">admin</option>
+                <option value="007">007</option>
+            </select>
+            <input type="submit" id="submitButton">
+        </form>
+        <script>
+            //四部分 username, password, first & last name and submit
+            //1. username
+            // browser 每 type一個char -> 透過ajax技術 -> server讀取string(req.body) -> 丟DB
+            // -> if string match db, return true -> browser 收到response, if true then disable submit
+
+            //2. password
+            // if 空字串 or password != password_confirm, then disable submit(這邊可以用preventDefault())
+
+            //3. first & last name
+            // 這邊沒特別處理
+
+            //4. submit 則是受username and password限制
+
+            // 這邊的故事是在type每個username的char，他就會send request一次，且觸發input event
+            // 而因為type每個input char，就會觸發一次readystagechange event
+            // 所以將readystagechange event寫成embedded event listener
+            //當readstage == DONE的時候，看要不要disable submit
+            // get the needed elements
+            var form = document.querySelector("#form-create-user");
+            var u_name = document.querySelector("#username");
+
+            var p1 = document.querySelector("#password");
+            var p2 = document.querySelector("#password2");
+
+            var name_Err = document.querySelector("#username-err");
+            var pwd_Err = document.querySelector("#password-err");
+
+            //embedded listener
+            u_name.addEventListener("input", function(){
+                console.log(u_name.value);
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "/checkUserName", true);
+                // send request body
+                xhr.send(u_name.value);
+                xhr.addEventListener("readystatechange", function(){
+                    if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200){
+                        // get response string
+                        var item = xhr.responseText;
+                        console.log(item);
+                        //這邊是check username，下面則是password (submit event listener)
+                        if (item === "true"){
+                            name_Err.textContent = "username has been used ! in js";
+                            document.querySelector("#submitButton").disabled = true;
+                        }
+                        else{
+                            name_Err.textContent = "";
+                            document.querySelector("#submitButton").disabled = false;
+                        }
+                    }
+                });
+            });
+
+            // check the password, if not match, disable the submit button
+            form.addEventListener("submit", function(e){
+                var ok = validatePwd();
+                if (!ok){
+                    //阻止event execute defualt行為
+                    e.preventDefault();
+                    return;
+                }
+            }) 
+            function validatePwd(){
+                // pwdErr.textContent = "";
+                if (p1.value === ""){
+                    pwd_Err.textContent = "Please Enter the password!"
+                    return false;
+                }
+                if (p1.value !== p2.value){
+                    pwd_Err.textContent = "Your password didn't match ! Please re-enter your passwords!";
+                    p1.value = "";
+                    p2.value = "";
+                    return false;
+                }
+                return true;
+            }
+        </script>
+    </body>
+</html>

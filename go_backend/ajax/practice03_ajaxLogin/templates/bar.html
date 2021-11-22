@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>bar</title>
+    </head>
+    <body>
+        <h1>Here is the bar page</h1><br>
+        
+        {{if .}}
+            Username {{.Username}} <br>
+            Pasword {{.Pasword}}<br>
+            First {{.First}}<br>
+            Last {{.Last}}<br>
+            Role {{.Role}}<br>
+        {{end}}
+        <h2><a href="/logout">log out</a></h2>
+    </body>
+</html>

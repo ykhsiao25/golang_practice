@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hello World</title>
+</head>
+<body>
+<!-- 第一個.是index對象，第二個是index位置 -->
+<!-- 這邊必須用template comment 否則只有html comment一樣會執行(跳error) -->
+{{/*index . 2*/}}
+{{/*index . 1*/}}
+{{/*index . 0*/}}
+
+
+{{.}}
+index should be slice, array, or map
+{{index .Words 2}}
+{{index .Words 1}}
+{{.Lname}}
+</body>
+</html>

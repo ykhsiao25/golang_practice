@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+    <body>
+        <script>
+            localStorage.setItem('favoriteflavor','vanilla');
+            var taste = localStorage.getItem('favoriteflavor');
+            console.log(taste);
+            localStorage.removeItem('favoriteflavor');
+            taste = localStorage.getItem('favoriteflavor');
+            console.log(taste)
+        </script>
+    </body>
+</html>

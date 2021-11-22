@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>index</title>
+        <style>
+            body {
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            h1{
+                font-size: 5vw;
+                cursor: pointer;
+                text-decoration: underline;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>make a request</h1>
+        <script>
+            // click發生時(看做一個event)，觸發eventhandler onclick attribute，執行eventhandler func()(也就是makeRequest)
+            // document.querySelector("h1").addEventListener('click', makeRequest); // the same as
+            document.querySelector("h1").onclick = makeRequest;
+            
+            function makeRequest(){
+                var xhr = new XMLHttpRequest();
+                // true 是說開啟 async 傳輸
+                xhr.open('GET', 'test.html');
+                xhr.onreadystatechange = function(){
+                    if (xhr.readystate === XMLHttpRequest.DONE && xhr.stauts === 200){
+                        alert(xhr.reponseText);
+                    }
+                };
+                xhr.send();
+            }
+        </script>
+    </body>
+</html>
