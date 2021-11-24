@@ -44,6 +44,7 @@ func (uc UserController) GetUser(res http.ResponseWriter, req *http.Request, p h
 	}
 	res.Header().Set("Content-Type", "application/json")
 	res.WriteHeader(http.StatusOK)
+	fmt.Println(string(bs))
 	fmt.Fprintln(res, string(bs))
 }
 func (uc UserController) CreateUser(res http.ResponseWriter, req *http.Request, p httprouter.Params) {
