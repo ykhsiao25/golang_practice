@@ -73,7 +73,7 @@ func (uc UserController) DeleteUser(res http.ResponseWriter, req *http.Request, 
 		return
 	}
 	oid := bson.ObjectIdHex(id)
-	if err := uc.session.DB("go-web-dev-db").C("users").Remove(oid); err != nil {
+	if err := uc.session.DB("go-web-dev-db").C("users").RemoveId(oid); err != nil {
 		res.WriteHeader(http.StatusNotFound)
 		return
 	}
