@@ -3,7 +3,9 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"test1/controllers"
+
+	"github.com/ykhsiao25/golang_practice/go_backend/mongodb/practice02_mongodb/controllers"
+	// "github.com/GoesToEleven/golang-web-dev/042_mongodb/05_mongodb/01_update-user-controller/controllers"
 
 	"github.com/julienschmidt/httprouter"
 	"gopkg.in/mgo.v2"
@@ -14,7 +16,8 @@ func main() {
 	r := httprouter.New()
 	r.GET("/", index)
 	r.GET("/user/:id", uc.GetUser)
-	r.POST("/user/", uc.CreateUser)
+	//注意，這邊一定不可以加上 "/"，不然會找不到
+	r.POST("/user", uc.CreateUser)
 	r.DELETE("/user/:id", uc.DeleteUser)
 	http.ListenAndServe("127.0.0.1:8080", r)
 }

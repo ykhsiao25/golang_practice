@@ -39,11 +39,16 @@ func (uc UserController) CreateUser(res http.ResponseWriter, req *http.Request, 
 
 	json.NewDecoder(req.Body).Decode(&user1)
 	//這樣也可以
-	// bs, err := io.ReadAll(req.Body)
+	// bs2, err := io.ReadAll(req.Body)
+	// fmt.Println("bs2", string(bs2))
 	// if err != nil {
 	// 	log.Fatalln(err)
 	// }
-	// json.Unmarshal(bs, &user1)
+	// err = json.Unmarshal(bs2, &user1)
+	// if err != nil {
+	// 	fmt.Println("err", err)
+	// }
+	// fmt.Println(user1)
 
 	user1.Id = "007"
 

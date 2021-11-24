@@ -5,7 +5,9 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"test1/models"
+
+	"github.com/ykhsiao25/golang_practice/go_backend/mongodb/practice02_mongodb/models"
+	// "github.com/GoesToEleven/golang-web-dev/042_mongodb/05_mongodb/01_update-user-controller/models"
 
 	"github.com/julienschmidt/httprouter"
 	"gopkg.in/mgo.v2"
