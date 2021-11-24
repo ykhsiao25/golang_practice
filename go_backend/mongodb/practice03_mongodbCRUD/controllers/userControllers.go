@@ -24,7 +24,7 @@ func NewUserController(sess *mgo.Session) *UserController {
 
 //get id 轉成 oid -> 透過oid去db 找user -> response user
 func (uc UserController) GetUser(res http.ResponseWriter, req *http.Request, p httprouter.Params) {
-	id := p.ByName("Id")
+	id := p.ByName("id")
 	//judge 是否為oid
 	if !bson.IsObjectIdHex(id) {
 		res.WriteHeader(http.StatusNotFound)
