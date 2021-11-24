@@ -40,7 +40,7 @@ func (uc UserController) GetUser(res http.ResponseWriter, req *http.Request, p h
 
 	bs, err := json.Marshal(user1)
 	if err != nil {
-		log.Fatalln(err)
+		fmt.Println(err)
 	}
 	res.Header().Set("Content-Type", "application/json")
 	res.WriteHeader(http.StatusOK)
