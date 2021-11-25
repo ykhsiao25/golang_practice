@@ -4,8 +4,8 @@ import (
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
-	"github.com/ykhsiao25/golang_practice/go_backend/mongodb/exercise1_5/controllers"
-	"github.com/ykhsiao25/golang_practice/go_backend/mongodb/exercise1_5/models"
+	"github.com/ykhsiao25/golang_practice/go_backend/mongodb/exercise1_2/controllers"
+	"github.com/ykhsiao25/golang_practice/go_backend/mongodb/exercise1_2/models"
 	"gopkg.in/mgo.v2/bson"
 )
 
