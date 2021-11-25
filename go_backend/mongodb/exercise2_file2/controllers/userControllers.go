@@ -36,7 +36,7 @@ func (uc UserController) GetUser(res http.ResponseWriter, r *http.Request, p htt
 		return
 	}
 
-	models.LoadUser(res, &uc)
+	models.LoadUser(res, &uc.session)
 
 	// Marshal provided interface into JSON structure
 	bs, _ := json.Marshal(user1)
@@ -59,7 +59,7 @@ func (uc UserController) CreateUser(res http.ResponseWriter, r *http.Request, _ 
 	uc.session[user1.Id] = user1
 
 	// ioutil.WriteFile("dbUsers/"+user1.Id.Hex()+".json", bs, 0644)
-	models.UpdateUser(res, &uc)
+	models.UpdateUser(res, &uc.session)
 
 	bs, _ := json.Marshal(user1)
 
@@ -85,7 +85,7 @@ func (uc UserController) DeleteUser(res http.ResponseWriter, r *http.Request, p 
 	}
 	delete(uc.session, oid)
 
-	models.UpdateUser(res, &uc)
+	models.UpdateUser(res, &uc.session)
 
 	res.WriteHeader(http.StatusOK) // 200
 	fmt.Fprint((res), "Deleted user", oid, "\n")
