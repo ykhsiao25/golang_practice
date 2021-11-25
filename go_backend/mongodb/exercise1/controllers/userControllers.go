@@ -6,7 +6,8 @@ import (
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
-	"github.com/ykhsiao25/golang_practice/go_backend/mongodb/exercise1_2/models"
+	"github.com/ykhsiao25/golang_practice/go_backend/mongodb/exercise1/models"
+
 	"gopkg.in/mgo.v2/bson"
 )
 
