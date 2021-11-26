@@ -56,6 +56,7 @@ func (c Controller) Signup(res http.ResponseWriter, req *http.Request) {
 		user1 = models.User{username, d_pwd, first, last, role}
 		session.DbSessions[ck.Value] = models.Session{UserName: username, LastActivity: time.Now()}
 		session.DbUsers[username] = user1
+		http.Redirect(res, req, "/login", http.StatusSeeOther)
 	}
 	c.tpl.ExecuteTemplate(res, "signup.html", user1)
 }
