@@ -14,7 +14,7 @@ func init() {
 }
 
 func main() {
-	c := controllers.NewController()
+	c := controllers.NewController(tpl)
 	http.HandleFunc("/", c.Index)
 	http.HandleFunc("/bar", c.Bar)
 	http.HandleFunc("/signup", c.Signup)

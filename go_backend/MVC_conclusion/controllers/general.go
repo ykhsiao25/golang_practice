@@ -15,7 +15,7 @@ func NewController(tpl *template.Template) *Controller {
 	return &Controller{tpl}
 }
 func (c Controller) Index(res http.ResponseWriter, req *http.Request) {
-	user1 := session.GetUser(req, req)
+	user1 := session.GetUser(res, req)
 	session.Show() // for demonstration purposes
 	c.tpl.ExecuteTemplate(res, "index.html", user1)
 }

@@ -13,7 +13,7 @@ import (
 // time邏輯: 每存取一次cookie(session)，就要更新一下cookie.MaxAge成Length(除非要delete為-1)
 // 每存取一次session就要更新一次sess.LastActivity = time.Now()，代表他有在使用
 // (因為signup and login)都是直接新增sess到dbSessions(他就是變相update LastActivity了)
-func (c Controller) Sigup(res http.ResponseWriter, req *http.Request) {
+func (c Controller) Signup(res http.ResponseWriter, req *http.Request) {
 	if session.AlreadyLoggedIn(res, req) {
 		http.Redirect(res, req, "/", http.StatusSeeOther)
 		return
@@ -29,7 +29,7 @@ func (c Controller) Sigup(res http.ResponseWriter, req *http.Request) {
 				Value: uid.String(),
 			}
 		}
-		c.MaxAge = session.Length
+		ck.MaxAge = session.Length
 		http.SetCookie(res, ck)
 
 		//parse the form
@@ -40,7 +40,7 @@ func (c Controller) Sigup(res http.ResponseWriter, req *http.Request) {
 		role := req.FormValue("role")
 
 		//check the username
-		if _, ok := session.dbUsers[username]; ok {
+		if _, ok := session.DbUsers[username]; ok {
 			http.Error(res, "Username already taken!", http.StatusForbidden)
 			return
 		}
@@ -54,8 +54,8 @@ func (c Controller) Sigup(res http.ResponseWriter, req *http.Request) {
 
 		//write to DB
 		user1 = models.User{username, d_pwd, first, last, role}
-		session.DbSessions[ck.Value] = models.Session{username, time.Now()}
-		session.dbUsers[username] = user1
+		session.DbSessions[ck.Value] = models.Session{UserName: username, LastActivity: time.Now()}
+		session.DbUsers[username] = user1
 	}
 	c.tpl.ExecuteTemplate(res, "signup.html", user1)
 }
@@ -97,7 +97,7 @@ func (c Controller) Login(res http.ResponseWriter, req *http.Request) {
 			return
 		}
 		//update the DB
-		session.DbSessions[ck.Value] = models.session{username, time.Now()}
+		session.DbSessions[ck.Value] = models.Session{username, time.Now()}
 
 		// Redirect the page
 		http.Redirect(res, req, "/", http.StatusSeeOther)

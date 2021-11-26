@@ -62,7 +62,7 @@ func AlreadyLoggedIn(res http.ResponseWriter, req *http.Request) bool {
 	}
 
 	//no user
-	if _, ok = DbUsers[sess.Username]; !ok {
+	if _, ok = DbUsers[sess.UserName]; !ok {
 		return false
 	}
 
