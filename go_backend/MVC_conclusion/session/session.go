@@ -6,7 +6,7 @@ import (
 	"time"
 
 	uuid "github.com/satori/go.uuid"
-	"github.com/ykhsiao25/golang_practice/go_backend/mongodb/MVC_conclusion/models"
+	"github.com/ykhsiao25/golang_practice/go_backend/MVC_conclusion/models"
 )
 
 const Length int = 30

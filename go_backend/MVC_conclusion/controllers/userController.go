@@ -5,8 +5,8 @@ import (
 	"time"
 
 	uuid "github.com/satori/go.uuid"
-	"github.com/ykhsiao25/golang_practice/go_backend/mongodb/MVC_conclusion/models"
-	"github.com/ykhsiao25/golang_practice/go_backend/mongodb/MVC_conclusion/session"
+	"github.com/ykhsiao25/golang_practice/go_backend/MVC_conclusion/models"
+	"github.com/ykhsiao25/golang_practice/go_backend/MVC_conclusion/session"
 	"golang.org/x/crypto/bcrypt"
 )
 

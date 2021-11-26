@@ -4,7 +4,7 @@ import (
 	"html/template"
 	"net/http"
 
-	"github.com/ykhsiao25/golang_practice/go_backend/mongodb/MVC_conclusion/controllers"
+	"github.com/ykhsiao25/golang_practice/go_backend/MVC_conclusion/controllers"
 )
 
 var tpl *template.Template
